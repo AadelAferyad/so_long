@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aaferyad <aaferyad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/18 00:22:46 by aaferyad          #+#    #+#             */
-/*   Updated: 2025/02/18 00:26:10 by aaferyad         ###   ########.fr       */
+/*   Created: 2024/10/31 02:11:05 by aaferyad          #+#    #+#             */
+/*   Updated: 2024/10/31 02:14:39 by aaferyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include "../libft/libft.h"
-# include "../gnl/get_next_line.h"
+#include "libft.h"
 
-struct	s_parser
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	int	player;
-	int	collectible;
-	int	exit;
-	int	x;
-	int	y;
-};
+	char	*str;
+	int		len1;
+	int		len2;
 
-#endif
+	if (!s1 || !s2)
+		return (NULL);
+	len1 = ft_strlen(s1);
+	len2 = ft_strlen(s2);
+	str = malloc(sizeof(char) * (len1 + len2 + 1));
+	if (!str)
+		return (NULL);
+	ft_strlcpy(str, s1, len1 + 1);
+	ft_strlcpy(str + len1, s2, len2 + 1);
+	return (str);
+}

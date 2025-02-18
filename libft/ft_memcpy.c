@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aaferyad <aaferyad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/18 00:22:46 by aaferyad          #+#    #+#             */
-/*   Updated: 2025/02/18 00:26:10 by aaferyad         ###   ########.fr       */
+/*   Created: 2024/10/23 17:58:39 by aaferyad          #+#    #+#             */
+/*   Updated: 2024/10/24 14:59:51 by aaferyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include "../libft/libft.h"
-# include "../gnl/get_next_line.h"
+#include "libft.h"
 
-struct	s_parser
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	int	player;
-	int	collectible;
-	int	exit;
-	int	x;
-	int	y;
-};
+	size_t	i;
 
-#endif
+	if (!dest && !src)
+		return (NULL);
+	i = 0;
+	while (i < n)
+	{
+		((unsigned char *) dest)[i] = ((unsigned char *) src)[i];
+		i++;
+	}
+	return (dest);
+}

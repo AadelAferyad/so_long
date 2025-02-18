@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aaferyad <aaferyad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/18 00:22:46 by aaferyad          #+#    #+#             */
-/*   Updated: 2025/02/18 00:26:10 by aaferyad         ###   ########.fr       */
+/*   Created: 2024/10/24 14:46:00 by aaferyad          #+#    #+#             */
+/*   Updated: 2024/10/24 15:08:26 by aaferyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include "../libft/libft.h"
-# include "../gnl/get_next_line.h"
+#include "libft.h"
 
-struct	s_parser
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	int	player;
-	int	collectible;
-	int	exit;
-	int	x;
-	int	y;
-};
+	unsigned char	*ptr1;
+	unsigned char	*ptr2;
+	size_t			i;
 
-#endif
+	if (!s1 && !s2)
+		return (0);
+	ptr1 = (unsigned char *) s1;
+	ptr2 = (unsigned char *) s2;
+	i = 0;
+	while (i < n)
+	{
+		if (ptr1[i] != ptr2[i])
+			return (ptr1[i] - ptr2[i]);
+		i++;
+	}
+	return (0);
+}

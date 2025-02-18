@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aaferyad <aaferyad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/18 00:22:46 by aaferyad          #+#    #+#             */
-/*   Updated: 2025/02/18 00:26:10 by aaferyad         ###   ########.fr       */
+/*   Created: 2024/11/06 16:59:18 by aaferyad          #+#    #+#             */
+/*   Updated: 2024/11/06 16:59:22 by aaferyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include "../libft/libft.h"
-# include "../gnl/get_next_line.h"
+#include "libft.h"
 
-struct	s_parser
+t_list	*ft_lstnew(void *content)
 {
-	int	player;
-	int	collectible;
-	int	exit;
-	int	x;
-	int	y;
-};
+	t_list	*node;
 
-#endif
+	node = malloc(sizeof(t_list));
+	if (!node)
+		return (NULL);
+	node->content = content;
+	node->next = NULL;
+	return (node);
+}

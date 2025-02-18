@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aaferyad <aaferyad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/18 00:22:46 by aaferyad          #+#    #+#             */
-/*   Updated: 2025/02/18 00:26:10 by aaferyad         ###   ########.fr       */
+/*   Created: 2024/10/25 01:41:46 by aaferyad          #+#    #+#             */
+/*   Updated: 2024/10/25 01:53:11 by aaferyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include "../libft/libft.h"
-# include "../gnl/get_next_line.h"
+#include "libft.h"
 
-struct	s_parser
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-	int	player;
-	int	collectible;
-	int	exit;
-	int	x;
-	int	y;
-};
+	void	*ptr;
+	size_t	msize;
 
-#endif
+	msize = nmemb * size;
+	if (nmemb && msize / nmemb != size)
+		return (NULL);
+	ptr = malloc(msize);
+	if (!ptr)
+		return (NULL);
+	ft_bzero(ptr, msize);
+	return (ptr);
+}

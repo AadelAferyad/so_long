@@ -1,31 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aaferyad <aaferyad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/18 00:22:46 by aaferyad          #+#    #+#             */
-/*   Updated: 2025/02/18 00:26:10 by aaferyad         ###   ########.fr       */
+/*   Created: 2024/10/23 18:06:59 by aaferyad          #+#    #+#             */
+/*   Updated: 2024/11/03 21:20:27 by aaferyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include "../libft/libft.h"
-# include "../gnl/get_next_line.h"
+#include "libft.h"
 
-struct	s_parser
+void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	int	player;
-	int	collectible;
-	int	exit;
-	int	x;
-	int	y;
-};
+	unsigned char	*u_dst;
+	unsigned char	*u_src;
 
-#endif
+	if (!dest && !src)
+		return (NULL);
+	u_dst = (unsigned char *)dest;
+	u_src = (unsigned char *)src;
+	if (dest <= src)
+		return (ft_memcpy(dest, src, n));
+	while (n > 0)
+	{
+		u_dst[n - 1] = u_src[n - 1];
+		n--;
+	}
+	return (dest);
+}
