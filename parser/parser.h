@@ -19,6 +19,8 @@
 # include "../libft/libft.h"
 # include "../gnl/get_next_line.h"
 
+# define MAP_CHAR "01CEP"
+
 struct	s_parser
 {
 	int	player;
@@ -28,4 +30,5 @@ struct	s_parser
 	int	y;
 };
 
+char	**parser(int fd);
 #endif
