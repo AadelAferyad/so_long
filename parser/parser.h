@@ -6,7 +6,7 @@
 /*   By: aaferyad <aaferyad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 00:22:46 by aaferyad          #+#    #+#             */
-/*   Updated: 2025/02/18 00:26:10 by aaferyad         ###   ########.fr       */
+/*   Updated: 2025/02/19 15:37:11 by aaferyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,7 @@ struct	s_parser
 };
 
 char	**parser(int fd);
+
+void	print_error_free_exit(char *str, char **buffer, struct s_parser *map);
+void	print_error_and_exit(char *str);
 #endif

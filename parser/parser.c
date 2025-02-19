@@ -6,7 +6,7 @@
 /*   By: aaferyad <aaferyad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 00:24:05 by aaferyad          #+#    #+#             */
-/*   Updated: 2025/02/18 11:50:06 by aaferyad         ###   ########.fr       */
+/*   Updated: 2025/02/19 15:40:43 by aaferyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,15 +115,9 @@ void	is_map_valid(char **map, struct s_parser **map_info)
 
 	i = 0;
 	if (check_is_map_rectangle(map, map_info) || check_walls(map, map_info))
-	{
-		/*free() Error handling [TODO] */
-		exit(1);
-	}
+		print_error_free_exit("Error\n[Invalid MAP]: Map is invalid\n", map, *map_info);
 	if (check_map_content(map, map_info))
-	{
-		/*free() Error handling [TODO] */
-		exit(1);
-	}
+		print_error_free_exit("Error\n[Invalid MAP]: Map is invalid\n", map, *map_info);
 }
 
 char	*read_file(int fd)
@@ -152,20 +146,14 @@ char	**parser(int fd)
 
 	map_info = ft_calloc(sizeof(struct s_parser), 1);
 	if (!map_info)
-		exit(1); /*Error handling [TODO]*/
+		print_error_and_exit("Error\n[malloc failed]: Could't malloc\n");
 	buffer = read_file(fd);
 	if (!buffer)
-	{
-		free(map_info);
-		exit(1); /*Error handling [TODO]*/
-	}
+		print_error_free_exit("Error\n[Read file fialed]: Could't read data from file\n", NULL, map_info);
 	map = ft_split(buffer, '\n');
 	free(buffer);
 	if (!map)
-	{
-		exit(1); /*Error handling [TODO]*/
-		free(map_info);
-	}
+		print_error_free_exit("Error\n[Split failed]: Could't split due the malloc fail\n", NULL, map_info);
 	is_map_valid(map, &map_info);
 	return (map);
 }
