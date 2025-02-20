@@ -8,10 +8,12 @@ gnl = gnl/get_next_line.c gnl/get_next_line_utils.c
 
 parser = parser/parser.c parser/errors.c
 
+checker = map_checker/map_checker.c
+
 ALL: $(NAME)
 
-$(NAME): $(parser) $(gnl) $(libft) $(ARGS)
-	$(CC) $(CFLAGS) $(ARGS) $(parser) $(gnl) $(libft) -o $(NAME)
+$(NAME): $(parser) $(checker) $(gnl) $(libft) $(ARGS)
+	$(CC) $(CFLAGS) $(ARGS) $(parser) $(checker) $(gnl) $(libft) -fsanitize=address -o $(NAME)
 
 clean:
 	rm -rf $(NAME)
