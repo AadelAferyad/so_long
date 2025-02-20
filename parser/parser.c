@@ -50,7 +50,7 @@ int	check_is_map_rectangle(char **map, struct s_parser **map_info)
 	(*map_info)->x = ft_strlen(map[0]);
 	while (map[i])
 	{
-		if (ft_strlen(map[i]) != (*map_info)->x)
+		if ((int) ft_strlen(map[i]) != (*map_info)->x)
 			return (1);
 		i++;
 	}
@@ -111,9 +111,6 @@ int	check_map_content(char **map, struct s_parser **map_info)
 
 void	is_map_valid(char **map, struct s_parser **map_info)
 {
-	int	i;
-
-	i = 0;
 	if (check_is_map_rectangle(map, map_info) || check_walls(map, map_info))
 		print_error_free_exit("Error\n[Invalid MAP]: Map is invalid\n", map, *map_info);
 	if (check_map_content(map, map_info))
