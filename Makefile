@@ -8,7 +8,7 @@ gnl = gnl/get_next_line.c gnl/get_next_line_utils.c
 
 parser = parser/parser.c parser/errors.c
 
-checker = map_checker/map_checker.c
+checker = map_checker/map_checker.c map_checker/errors.c
 
 ALL: $(NAME)
 

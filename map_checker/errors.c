@@ -1,37 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aaferyad <aaferyad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/19 17:16:21 by aaferyad          #+#    #+#             */
-/*   Updated: 2025/02/21 21:58:29 by aaferyad         ###   ########.fr       */
+/*   Created: 2025/02/21 21:48:40 by aaferyad          #+#    #+#             */
+/*   Updated: 2025/02/21 21:57:39 by aaferyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "map_checker.h"
 
-int	main(int ac, char **av)
+void	print_exit(char *str)
 {
-	int	fd;
-	char	**map;
+	ft_putstr_fd(str, 2);
+	exit(1);
+}
+
+void	cleanup_map_checker(char *str, char **buffer, t_map *map)
+{
 	int	i;
 
-	if (ac < 2)
-		return (0);
-	fd = open(av[1], O_RDONLY);
-	if (fd == -1)
-		print_error_and_exit("Error\n[Open failed]: Can't open file\n");
-	map = parser(fd);
-	map_checker(map);
 	i = 0;
-	while (map[i])
+	while (buffer && buffer[i])
 	{
-		printf("%s\n", map[i]);
-		free(map[i]);
+		free(buffer[i]);
 		i++;
 	}
+	free(buffer);
 	free(map);
-	return (0);
+	print_exit(str);
 }

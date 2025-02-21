@@ -6,7 +6,7 @@
 /*   By: aaferyad <aaferyad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:19:28 by aaferyad          #+#    #+#             */
-/*   Updated: 2025/02/21 00:03:50 by aaferyad         ###   ########.fr       */
+/*   Updated: 2025/02/21 21:56:45 by aaferyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,6 @@ typedef struct map_info
 } t_map;
 
 void	map_checker(char **buffer);
-
+void	print_exit(char *str);
+void	cleanup_map_checker(char *str, char **buffer, t_map *map);
 #endif

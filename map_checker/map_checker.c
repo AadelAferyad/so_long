@@ -6,7 +6,7 @@
 /*   By: aaferyad <aaferyad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:19:41 by aaferyad          #+#    #+#             */
-/*   Updated: 2025/02/21 00:14:11 by aaferyad         ###   ########.fr       */
+/*   Updated: 2025/02/21 21:58:46 by aaferyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,19 @@ void	player_position(char **map, int *x, int *y)
 		
 }
 
+void	free_map(char **map)
+{
+	int	i;
+
+	i = 0;
+	while (map[i])
+	{
+		free(map[i]);
+		i++;
+	}
+	free(map);
+}
+
 char	**allocate_map(char **buffer, t_map *map_info)
 {
 	char	**map;
@@ -55,16 +68,23 @@ char	**allocate_map(char **buffer, t_map *map_info)
 	map_info->height = map_height(buffer);
 	map_info->width = (int) ft_strlen(buffer[0]);
 	map = ft_calloc(sizeof(char *), map_info->height + 1);
+	if (!map)
+		cleanup_map_checker("Error\n[malloc failed]: Could't malloc\n", buffer, map_info);
 	while (i < map_info->height)
 	{
 		map[i] = ft_strdup(buffer[i]);
+		if (!map[i])
+		{
+			free_map(map);
+			cleanup_map_checker("Error\n[malloc failed]: Could't malloc\n", buffer, map_info);
+		}
 		i++;
 	}
 	map[i] = NULL;
 	return (map);
 }
 
-void	print_map(char **buffer, int x, int y)
+void	print_map(char **buffer)
 {
 	int	i;
 	int	j;
@@ -76,10 +96,7 @@ void	print_map(char **buffer, int x, int y)
 		j = 0;
 		while (buffer[i][j])
 		{
-			if (x == j && i == y)
-				printf(">");
-			else
-				printf("%c", buffer[i][j]);
+			printf("%c", buffer[i][j]);
 			j++;
 		}
 		printf("\n");
@@ -102,14 +119,11 @@ void	recursive_flood(char **map, int x, int y, t_map *map_info)
 		map_info->coins_exit--;
 		map[y][x] = 'W';
 	}
-	print_map(map, x, y);
+	if (map[y][x] != 'W' && map[y][x] != 'X' && map[y][x] == '0')
+		map[y][x] = 'N';
 	recursive_flood(map, x + 1, y, map_info);
-	if (map[y][x] != 'W' && map[y][x] != 'X' && map[y][x] == '0')
-		map[y][x] = 'N';
-	recursive_flood(map, x, y + 1, map_info);
 	recursive_flood(map, x - 1, y, map_info);
-	if (map[y][x] != 'W' && map[y][x] != 'X' && map[y][x] == '0')
-		map[y][x] = 'N';
+	recursive_flood(map, x, y + 1, map_info);
 	recursive_flood(map, x, y - 1, map_info);
 }
 
@@ -119,8 +133,8 @@ void	check_flood_fill_path(char **map, t_map *map_info)
 	int	y;
 
      	player_position(map, &x, &y);
-	printf("inside check : x :%d  width: %d y : %d height : %d\n", x, map_info->width, y, map_info->height);
 	recursive_flood(map, x, y, map_info);
+	print_map(map);
 }
 
 
@@ -149,8 +163,14 @@ void	check_for_valid_path(char **buffer, t_map *map)
 
 	grid = allocate_map(buffer, map);
 	num_of_coins(grid, map);
-	printf("nums of coins : %d\n", map->coins_exit);
 	check_flood_fill_path(grid, map);
+	free_map(grid);
+	if (map->coins_exit <= 0)
+		return ;
+	free(map);
+	free_map(buffer);
+	ft_putstr_fd("Error\n [Invalid Map] no valid path\n", 2);
+	exit(1);
 }
 
 void	map_checker(char **buffer)
@@ -158,5 +178,11 @@ void	map_checker(char **buffer)
 	t_map	*map;
 
 	map = ft_calloc(sizeof(t_map), 1);
+	if (!map)
+	{
+		free_map(buffer);
+		ft_putstr_fd("Error\n[malloc failed]: Could't malloc\n", 2);
+		exit(1);
+	}
 	check_for_valid_path(buffer, map);
 }
