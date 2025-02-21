@@ -26,13 +26,9 @@
 
 typedef struct map_info
 {
-	int	coins;
-	int	*player;
-	int	*exit;
+	int	coins_exit;
 	int	height;
 	int	width;
-	int	x;
-	int	y;
 } t_map;
 
 void	map_checker(char **buffer);

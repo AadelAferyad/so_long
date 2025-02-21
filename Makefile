@@ -13,7 +13,7 @@ checker = map_checker/map_checker.c
 ALL: $(NAME)
 
 $(NAME): $(parser) $(checker) $(gnl) $(libft) $(ARGS)
-	$(CC) $(CFLAGS) $(ARGS) $(parser) $(checker) $(gnl) $(libft) -fsanitize=address -o $(NAME)
+	$(CC) $(CFLAGS) $(ARGS) $(parser) $(checker) $(gnl) $(libft) -o $(NAME)
 
 clean:
 	rm -rf $(NAME)
