@@ -6,87 +6,11 @@
 /*   By: aaferyad <aaferyad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 00:24:05 by aaferyad          #+#    #+#             */
-/*   Updated: 2025/02/19 15:40:43 by aaferyad         ###   ########.fr       */
+/*   Updated: 2025/02/22 10:47:07 by aaferyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
-
-int	check_upper_bottom_walls(char *buffer)
-{
-	int	i;
-
-	i = 0;
-	while (buffer[i])
-	{
-		if (buffer[i] != '1')
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-int	check_walls(char **map, struct s_parser **map_info)
-{
-	int	i;
-
-	i = 0;
-	while (map[i])
-	{
-		if ((!i || !map[i + 1]) && check_upper_bottom_walls(map[i]))
-			return (1);
-		else if (map[i][0] != '1' || map[i][(*map_info)->x - 1] != '1')
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-int	check_is_map_rectangle(char **map, struct s_parser **map_info)
-{
-	int	i;
-
-	i = 1;
-	(*map_info)->x = ft_strlen(map[0]);
-	while (map[i])
-	{
-		if ((int) ft_strlen(map[i]) != (*map_info)->x)
-			return (1);
-		i++;
-	}
-	(*map_info)->y = i;
-	if ((*map_info)->y >= (*map_info)->x)
-		return (1);
-	return (0);
-}
-
-int	check_map_requirements(char c, struct s_parser **map)
-{
-	int	i;
-
-	i = 0;
-	if (c == 'P')
-	{
-		if ((*map)->player == 1)
-			return (1);
-		(*map)->player = 1;
-	}
-	if (c == 'E')
-	{
-		if ((*map)->exit == 1)
-			return (1);
-		(*map)->exit = 1;
-	}
-	if (c == 'C')
-		(*map)->collectible++;
-	while (MAP_CHAR[i])
-	{
-		if (c == MAP_CHAR[i])
-			return (0);
-		i++;
-	}
-	return (1);
-}
 
 int	check_map_content(char **map, struct s_parser **map_info)
 {
@@ -109,12 +33,12 @@ int	check_map_content(char **map, struct s_parser **map_info)
 	return (0);
 }
 
-void	is_map_valid(char **map, struct s_parser **map_info)
+void	is_map_valid(char **map, struct s_parser **info)
 {
-	if (check_is_map_rectangle(map, map_info) || check_walls(map, map_info))
-		print_error_free_exit("Error\n[Invalid MAP]: Map is invalid\n", map, *map_info);
-	if (check_map_content(map, map_info))
-		print_error_free_exit("Error\n[Invalid MAP]: Map is invalid\n", map, *map_info);
+	if (check_is_map_rectangle(map, info) || check_walls(map, info))
+		print_error_free_exit(INVALID, map, *info);
+	if (check_map_content(map, info))
+		print_error_free_exit(INVALID, map, *info);
 }
 
 char	*read_file(int fd)
@@ -138,19 +62,21 @@ char	*read_file(int fd)
 char	**parser(int fd)
 {
 	struct s_parser	*map_info;
-	char	*buffer;
-	char	**map;
+	char			*buffer;
+	char			**map;
 
 	map_info = ft_calloc(sizeof(struct s_parser), 1);
 	if (!map_info)
-		print_error_and_exit("Error\n[malloc failed]: Could't malloc\n");
+		print_error_and_exit(MALLOC);
 	buffer = read_file(fd);
 	if (!buffer)
-		print_error_free_exit("Error\n[Read file fialed]: Could't read data from file\n", NULL, map_info);
+		print_error_free_exit(READ, NULL, map_info);
 	map = ft_split(buffer, '\n');
 	free(buffer);
 	if (!map)
-		print_error_free_exit("Error\n[Split failed]: Could't split due the malloc fail\n", NULL, map_info);
+		print_error_free_exit(SPLIT, NULL, map_info);
 	is_map_valid(map, &map_info);
+	free(map_info);
+	map_checker(map);
 	return (map);
 }

@@ -6,7 +6,7 @@
 /*   By: aaferyad <aaferyad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:16:21 by aaferyad          #+#    #+#             */
-/*   Updated: 2025/02/21 21:58:29 by aaferyad         ###   ########.fr       */
+/*   Updated: 2025/02/22 10:16:56 by aaferyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	main(int ac, char **av)
 	if (fd == -1)
 		print_error_and_exit("Error\n[Open failed]: Can't open file\n");
 	map = parser(fd);
-	map_checker(map);
 	i = 0;
 	while (map[i])
 	{

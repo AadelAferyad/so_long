@@ -6,7 +6,7 @@
 /*   By: aaferyad <aaferyad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 00:22:46 by aaferyad          #+#    #+#             */
-/*   Updated: 2025/02/19 15:37:11 by aaferyad         ###   ########.fr       */
+/*   Updated: 2025/02/22 10:37:01 by aaferyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <fcntl.h>
 # include "../libft/libft.h"
 # include "../gnl/get_next_line.h"
+# include "map_checker.h"
 
 # define MAP_CHAR "01CEP"
 
@@ -34,4 +35,8 @@ char	**parser(int fd);
 
 void	print_error_free_exit(char *str, char **buffer, struct s_parser *map);
 void	print_error_and_exit(char *str);
+int		check_map_requirements(char c, struct s_parser **map);
+int		check_is_map_rectangle(char **map, struct s_parser **map_info);
+int		check_walls(char **map, struct s_parser **map_info);
+int		check_upper_bottom_walls(char *buffer);
 #endif

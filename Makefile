@@ -6,14 +6,13 @@ libft = libft/ft_atoi.c libft/ft_bzero.c libft/ft_calloc.c libft/ft_isalnum.c li
 
 gnl = gnl/get_next_line.c gnl/get_next_line_utils.c 
 
-parser = parser/parser.c parser/errors.c
+parser = parser/parser.c parser/errors.c parser/map_checker.c parser/errors_map_checker.c parser/parser_util.c parser/map_checker_util.c
 
-checker = map_checker/map_checker.c map_checker/errors.c
 
 ALL: $(NAME)
 
-$(NAME): $(parser) $(checker) $(gnl) $(libft) $(ARGS)
-	$(CC) $(CFLAGS) $(ARGS) $(parser) $(checker) $(gnl) $(libft) -o $(NAME)
+$(NAME): $(parser) $(gnl) $(libft) $(ARGS)
+	$(CC) $(CFLAGS) $(ARGS) $(parser) $(gnl) $(libft) -o $(NAME)
 
 clean:
 	rm -rf $(NAME)
