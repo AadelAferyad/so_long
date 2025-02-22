@@ -14,23 +14,14 @@
 
 int	main(int ac, char **av)
 {
-	int	fd;
 	char	**map;
-	int	i;
+	void	*mlx_con;
+	void	*win;
 
-	if (ac < 2)
-		return (0);
-	fd = open(av[1], O_RDONLY);
-	if (fd == -1)
-		print_error_and_exit("Error\n[Open failed]: Can't open file\n");
-	map = parser(fd);
-	i = 0;
-	while (map[i])
-	{
-		printf("%s\n", map[i]);
-		free(map[i]);
-		i++;
-	}
+	map = parser(ac, av);
+	mlx_con = mlx_init();
+	win = mlx_new_window(mlx_con, 1200, 900, "so_long");
+	mlx_destroy_window(mlx_con, win);
 	free(map);
 	return (0);
 }

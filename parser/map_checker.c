@@ -43,8 +43,6 @@ void	recursive_flood(char **map, int x, int y, t_map *map_info)
 		map_info->coins_exit--;
 	else if (map[y][x] == EXIT)
 		map_info->coins_exit--;
-	/*if (map[y][x] != COIN && map[y][x] != EXIT && map[y][x] == '0')*/
-	/*	map[y][x] = 'N';*/
 	map[y][x] = 'N';
 	recursive_flood(map, x + 1, y, map_info);
 	recursive_flood(map, x - 1, y, map_info);

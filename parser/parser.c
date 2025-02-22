@@ -59,12 +59,33 @@ char	*read_file(int fd)
 	return (buffer);
 }
 
-char	**parser(int fd)
+void	check_file_name(char *str)
+{
+	int	i;
+
+	while (str[i])
+	{
+		if (str[i] == '.')
+			break ;
+		i++;
+	}
+	if (!str[i] || ft_strncmp(&str[i], ".ber", 10))
+		print_error_and_exit("Error\n[Wrong file]: worng file type\n");
+}
+
+char	**parser(int ac, char **av)
 {
 	struct s_parser	*map_info;
 	char			*buffer;
 	char			**map;
+	int				fd;
 
+	if (ac != 2)
+		exit (0);
+	check_file_name(av[1]);
+	fd = open(av[1], O_RDONLY);
+	if (fd == -1)
+		print_error_and_exit("Error\n[Open failed]: Can't open file\n");
 	map_info = ft_calloc(sizeof(struct s_parser), 1);
 	if (!map_info)
 		print_error_and_exit(MALLOC);

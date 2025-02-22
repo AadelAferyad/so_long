@@ -31,7 +31,7 @@ struct	s_parser
 	int	y;
 };
 
-char	**parser(int fd);
+char	**parser(int ac, char **av);
 
 void	print_error_free_exit(char *str, char **buffer, struct s_parser *map);
 void	print_error_and_exit(char *str);

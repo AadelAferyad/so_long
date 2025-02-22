@@ -13,6 +13,7 @@
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-#include "parser/parser.h"
+# include "parser/parser.h"
+# include "minilibx/mlx.h"
 
 #endif
