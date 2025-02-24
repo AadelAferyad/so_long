@@ -13,7 +13,7 @@ parser = parser/parser.c parser/errors.c parser/map_checker.c parser/errors_map_
 ALL: $(NAME)
 
 $(NAME): $(mlx) $(parser) $(gnl) $(libft) $(ARGS)
-	$(CC) $(CFLAGS) $(ARGS) $(mlx) $(parser) $(gnl) $(libft) -lX11 -lm -lXext -o $(NAME)
+	$(CC) $(CFLAGS) $(ARGS) $(mlx) $(parser) $(gnl) $(libft) -lX11 -lm -lXext -fsanitize=address -o $(NAME)
 
 clean:
 	rm -rf $(NAME)

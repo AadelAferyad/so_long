@@ -16,4 +16,16 @@
 # include "parser/parser.h"
 # include "minilibx/mlx.h"
 
+typedef struct mlx_struct
+{
+	void	*mlx;
+	void	*win;
+} t_mlx;
+
+typedef struct game_map
+{
+	int	y;
+	int	x;
+	char	**map;
+} t_game;
 #endif

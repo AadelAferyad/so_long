@@ -21,6 +21,7 @@
 # include "map_checker.h"
 
 # define MAP_CHAR "01CEP"
+# define EXTEN ".ber"
 
 struct	s_parser
 {

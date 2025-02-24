@@ -63,12 +63,15 @@ void	check_file_name(char *str)
 {
 	int	i;
 
+	i = 0;
 	while (str[i])
 	{
 		if (str[i] == '.')
 			break ;
 		i++;
 	}
+	if (i < 2)
+		print_error_and_exit("Error\n[Wrong file]: worng file type\n");
 	if (!str[i] || ft_strncmp(&str[i], ".ber", 10))
 		print_error_and_exit("Error\n[Wrong file]: worng file type\n");
 }
