@@ -6,7 +6,7 @@
 /*   By: aaferyad <aaferyad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 00:01:25 by aaferyad          #+#    #+#             */
-/*   Updated: 2025/02/22 10:18:23 by aaferyad         ###   ########.fr       */
+/*   Updated: 2025/02/24 13:37:08 by aaferyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,25 @@
 # include "parser/parser.h"
 # include "minilibx/mlx.h"
 
-typedef struct mlx_struct
-{
-	void	*mlx;
-	void	*win;
-} t_mlx;
+# define UP 119
+# define DOWN 115
+# define RIGHT 100
+# define LEFT 97
+# define ESC 65307
 
 typedef struct game_map
 {
 	int	y;
 	int	x;
+	int	width;
+	int	height;
+	int	coins;
+	int	door;
 	char	**map;
+	void	*mlx;
+	void	*win;
 } t_game;
+
+void	game_init(t_game *game);
+
 #endif
