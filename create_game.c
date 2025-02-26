@@ -178,17 +178,11 @@ int	handle_key(int key_code, t_game *game)
 	return (0);
 }
 
-int	handle_no_event()
-{
-	return (0);
-}
-
 void	game_init(t_game *game)
 {
 
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, game->width * 40, game->height * 40, "so_long");
-	/*mlx_loop_hook(game->mlx, handle_no_event, game);*/
 	rander_game(game);
 	mlx_hook(game->win, 2, 3, handle_key, game);
 	mlx_hook(game->win, 17, 2, cleanup, game);
