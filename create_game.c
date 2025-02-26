@@ -120,18 +120,20 @@ void	rander_game(t_game *game)
 	}
 }
 
-void	cleanup(t_game *game)
+int	cleanup(t_game *game)
 {
 	free_map(game->map);
 	mlx_destroy_window(game->mlx, game->win);
 	mlx_destroy_display(game->mlx);
 	free(game->mlx);
 	exit(0);
-
+	return (0);
 }
 
 void	movment(t_game *game, int x , int y)
 {
+	static int	moves;
+
 	if (game->map[y][x] != WALL)
 	{
 		if (game->map[y][x] == COIN)
@@ -143,6 +145,9 @@ void	movment(t_game *game, int x , int y)
 			return ;
 		create_empty(game, game->x, game->y);
 		create_player(game, x, y);
+		moves++;
+		ft_putnbr_fd(moves, 1);
+		ft_putchar('\n');
 		if (game->map[y][x] == EXIT && !game->coins)
 			cleanup(game);
 		game->x = x;
@@ -161,14 +166,20 @@ int	handle_key(int key_code, t_game *game)
 		cleanup(game);
 	if (key_code == UP)
 		y--;
-	if (key_code == DOWN)
+	else if (key_code == DOWN)
 		y++;
-	if (key_code == LEFT)
+	else if (key_code == LEFT)
 		x--;
-	if (key_code == RIGHT)
+	else if (key_code == RIGHT)
 		x++;
+	else
+		return (0);
 	movment(game, x , y);
-	printf("x : %d y : %d coins : %d %d\n", game->x, game->y, game->coins, key_code);
+	return (0);
+}
+
+int	handle_no_event()
+{
 	return (0);
 }
 
@@ -177,7 +188,9 @@ void	game_init(t_game *game)
 
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, game->width * 40, game->height * 40, "so_long");
+	/*mlx_loop_hook(game->mlx, handle_no_event, game);*/
 	rander_game(game);
-	mlx_key_hook(game->win, handle_key, game);
+	mlx_hook(game->win, 2, 3, handle_key, game);
+	mlx_hook(game->win, 17, 2, cleanup, game);
 	mlx_loop(game->mlx);
 }
