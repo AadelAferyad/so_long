@@ -49,8 +49,6 @@ void	rander_game(t_game *game)
 				create_wall(game, x, y);
 			if (game->map[y][x] == COIN)
 				create_collectible(game, x, y);
-			if (game->map[y][x] == EXIT)
-				create_exit(game, x, y);
 			if (game->map[y][x] == PLAYER)
 				create_player(game, x, y);
 			x++;
@@ -70,8 +68,8 @@ void	movment(t_game *game, int x, int y)
 			game->map[y][x] = EMPTY;
 			game->coins--;
 		}
-		if (game->map[y][x] == EXIT && game->coins)
-			return ;
+		if (!game->coins)
+			create_exit(game, game->exit_x, game->exit_y);
 		create_empty(game, game->x, game->y);
 		create_player(game, x, y);
 		moves++;

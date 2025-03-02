@@ -63,12 +63,36 @@ void	map_dimensions(t_game *game)
 	game->height = i;
 }
 
+static void	exit_dimensions(t_game *game)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (game->map[i])
+	{
+		j = 0;
+		while (game->map[i][j])
+		{
+			if (game->map[i][j] == EXIT)
+			{
+				game->exit_x = j;
+				game->exit_y = i;
+				return ;
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
 int	main(int ac, char **av)
 {
 	t_game	game;
 
 	game.map = parser(ac, av);
 	map_dimensions(&game);
+	exit_dimensions(&game);
 	game_init(&game);
 	free(game.map);
 	return (0);

@@ -26,6 +26,8 @@ typedef struct game_map
 {
 	int		y;
 	int		x;
+	int		exit_y;
+	int		exit_x;
 	int		width;
 	int		height;
 	int		coins;
