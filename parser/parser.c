@@ -39,6 +39,8 @@ void	is_map_valid(char **map, struct s_parser **info)
 		print_error_free_exit(INVALID, map, *info);
 	if (check_map_content(map, info))
 		print_error_free_exit(INVALID, map, *info);
+	if (!(*info)->player || !(*info)->exit|| !(*info)->collectible)
+		print_error_free_exit(INVALID, map, *info);
 }
 
 char	*read_file(int fd)
