@@ -63,7 +63,7 @@ void	create_empty(t_game *game, int x, int y)
 {
 	void	*img;
 
-	img = mlx_file_to_image(game->mlx, "./sprites/empty.xpm");
+	img = mlx_file_to_image(game->mlx, "./sprites/floor.xpm");
 	if (!img)
 		exit(21);
 	mlx_put_image_to_window(game->mlx, game->win, img, x * 40, y * 40);
