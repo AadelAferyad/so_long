@@ -6,7 +6,7 @@
 /*   By: aaferyad <aaferyad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 23:35:20 by aaferyad          #+#    #+#             */
-/*   Updated: 2025/03/02 23:51:01 by aaferyad         ###   ########.fr       */
+/*   Updated: 2025/03/03 05:02:38 by aaferyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,29 +50,13 @@ void	rander_game(t_game *game)
 			if (game->map[y][x] == COIN)
 				create_collectible(game, x, y);
 			if (game->map[y][x] == PLAYER)
-				create_player(game, x, y, "./sprites/player_1.xpm");
+				create_player(game, x, y, "./sprites/front_walk8.xpm");
 			x++;
 		}
 		y++;
 	}
 }
 
-void	create_animation(t_game *game, int x, int y)
-{
-	static int	i;
-
-	if (i % 5 == 0)
-		create_player(game, x , y, "./sprites/player_1.xpm");
-	else if (i % 5 == 1)
-		create_player(game, x , y, "./sprites/player_2.xpm");
-	else if (i % 5 == 2)
-		create_player(game, x , y, "./sprites/player_3.xpm");
-	else if (i % 5 == 3)
-		create_player(game, x , y, "./sprites/player_4.xpm");
-	else if (i % 5 == 4)
-		create_player(game, x , y, "./sprites/player_5.xpm");
-	i++;
-}
 
 void	movment(t_game *game, int x, int y)
 {

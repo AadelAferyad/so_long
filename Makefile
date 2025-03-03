@@ -7,7 +7,7 @@ gnl = gnl/get_next_line.c gnl/get_next_line_utils.c
 
 mlx = minilibx/libmlx.a
 parser = parser/parser.c parser/errors.c parser/map_checker.c parser/errors_map_checker.c parser/parser_util.c parser/map_checker_util.c
-game = create_game_bonus.c game_util_bonus.c
+game = create_game_bonus.c game_util_bonus.c create_animation.c
 
 
 ALL: $(NAME)
