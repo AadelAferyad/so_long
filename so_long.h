@@ -14,7 +14,7 @@
 # define SO_LONG_H
 
 # include "parser/parser.h"
-# include "minilibx/mlx.h"
+# include "mlx.h"
 
 # define UP 119
 # define DOWN 115

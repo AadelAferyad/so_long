@@ -51,8 +51,6 @@ void	rander_game(t_game *game)
 				create_collectible(game, x, y);
 			if (game->map[y][x] == PLAYER)
 				create_player(game, x, y, "./sprites/front_walk8.xpm");
-			if (game->map[y][x] == EMPTY)
-				create_empty(game, x, y);
 			x++;
 		}
 		y++;

@@ -5,15 +5,14 @@ libft = libft/ft_atoi.c libft/ft_bzero.c libft/ft_calloc.c libft/ft_isalnum.c li
 
 gnl = gnl/get_next_line.c gnl/get_next_line_utils.c 
 
-mlx = minilibx/libmlx.a
 parser = parser/parser.c parser/errors.c parser/map_checker.c parser/errors_map_checker.c parser/parser_util.c parser/map_checker_util.c
 game = create_game_bonus.c game_util_bonus.c create_animation.c
 
 
 ALL: $(NAME)
 
-$(NAME): $(mlx) $(parser) $(game) $(gnl) $(libft) $(ARGS)
-	$(CC) $(CFLAGS) $(ARGS) $(game) $(mlx) $(parser) $(gnl) $(libft) -lX11 -lm -lXext -o $(NAME)
+$(NAME): $(parser) $(game) $(gnl) $(libft) $(ARGS)
+	$(CC) $(CFLAGS) $(ARGS) $(game) $(parser) $(gnl) $(libft) -lmlx -lX11 -lm -lXext -o $(NAME)
 
 clean:
 	rm -rf $(NAME)
