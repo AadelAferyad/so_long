@@ -12,38 +12,19 @@
 
 #include "map_checker.h"
 
-/*void	print_map(char **buffer)*/
-/*{*/
-/*	int	i;*/
-/*	int	j;*/
-/**/
-/*	i = 0;*/
-/**/
-/*	while (buffer[i])*/
-/*	{*/
-/*		j = 0;*/
-/*		while (buffer[i][j])*/
-/*		{*/
-/*			printf("%c", buffer[i][j]);*/
-/*			j++;*/
-/*		}*/
-/*		printf("\n");*/
-/*		i++;*/
-/*	}*/
-/*}*/
-
 void	recursive_flood(char **map, int x, int y, t_map *map_info)
 {
 	if (x <= 0 || y <= 0 || x >= map_info->width || y >= map_info->height
-		|| map[y][x] == WALL)
+		|| map[y][x] == WALL || (map[y][x] == EXIT))
 		return ;
-	if (map_info->coins_exit <= 0 || map[y][x] == 'N')
+	if ((map_info->coins <= 0 && map_info->exit) || map[y][x] == 'N')
 		return ;
 	if (map[y][x] == COIN)
-		map_info->coins_exit--;
-	else if (map[y][x] == EXIT)
-		map_info->coins_exit--;
-	map[y][x] = 'N';
+		map_info->coins--;
+	if (map[y][x] == EXIT)
+		map_info->exit = 1;
+	else
+		map[y][x] = 'N';
 	recursive_flood(map, x + 1, y, map_info);
 	recursive_flood(map, x - 1, y, map_info);
 	recursive_flood(map, x, y + 1, map_info);
@@ -65,13 +46,14 @@ void	num_of_coins(char **map, t_map *map_info)
 	int	j;
 
 	i = 0;
+	map_info->exit = 0;
 	while (map[i])
 	{
 		j = 0;
 		while (map[i][j])
 		{
-			if (map[i][j] == COIN || map[i][j] == EXIT)
-				map_info->coins_exit++;
+			if (map[i][j] == COIN)
+				map_info->coins++;
 			j++;
 		}
 		i++;
@@ -86,7 +68,7 @@ void	check_for_valid_path(char **buffer, t_map *map)
 	num_of_coins(grid, map);
 	check_flood_fill_path(grid, map);
 	free_map(grid);
-	if (map->coins_exit <= 0)
+	if (map->coins <= 0)
 	{
 		free(map);
 		return ;

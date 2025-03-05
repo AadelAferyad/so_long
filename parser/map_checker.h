@@ -31,7 +31,8 @@
 
 typedef struct map_info
 {
-	int	coins_exit;
+	int	exit;
+	int	coins;
 	int	height;
 	int	width;
 }	t_map;

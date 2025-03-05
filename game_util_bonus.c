@@ -25,10 +25,7 @@ void	create_collectible(t_game *game, int x, int y)
 	static int	i;
 	void	*img;
 
-	if (i % 2)
-		img = mlx_file_to_image(game->mlx, "./sprites/coin_1.xpm");
-	else
-		img = mlx_file_to_image(game->mlx, "./sprites/coin.xpm");
+		img = mlx_file_to_image(game->mlx, "./sprites/coin1.xpm");
 	if (!img)
 		exit(21);
 	create_empty(game, x, y);

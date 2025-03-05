@@ -22,6 +22,8 @@
 # define LEFT 97
 # define ESC 65307
 
+# define DELAY 5000
+
 typedef struct game_map
 {
 	int		y;

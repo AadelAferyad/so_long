@@ -51,6 +51,8 @@ void	rander_game(t_game *game)
 				create_collectible(game, x, y);
 			if (game->map[y][x] == PLAYER)
 				create_player(game, x, y, "./sprites/front_walk8.xpm");
+			if (game->map[y][x] == EXIT)
+				create_exit(game, x, y);
 			x++;
 		}
 		y++;
@@ -67,10 +69,11 @@ void	movment(t_game *game, int x, int y)
 		if (game->map[y][x] == COIN)
 		{
 			game->map[y][x] = EMPTY;
+			game->map[y][x] = 0;
 			game->coins--;
 		}
-		if (!game->coins)
-			create_exit(game, game->exit_x, game->exit_y);
+		if (game->map[y][x] == EXIT && game->coins)
+			return ;
 		create_empty(game, game->x, game->y);
 		create_animation(game, x, y);
 		moves++;
@@ -108,23 +111,7 @@ int	handle_key(int key_code, t_game *game)
 
 int no_event(t_game *game)
 {
-	int	i;
-	int	j;
-
-	i = 1;
-	while (game->map[i])
-	{
-		j = 1;
-		while (game->map[i][j])
-		{
-			if (game->map[i][j] == COIN)
-			{
-				create_collectible(game, j, i);
-			}
-			j++;
-		}
-		i++;
-	}
+	(void) game;
 	return (0);
 }
 
