@@ -12,7 +12,7 @@
 
 #include "parser.h"
 
-int	check_map_content(char **map, struct s_parser **map_info)
+int	check_map_content(char **map, struct s_parser **map_info, int enemy)
 {
 	int	i;
 	int	j;
@@ -24,7 +24,11 @@ int	check_map_content(char **map, struct s_parser **map_info)
 		j = 0;
 		while (map[i][j])
 		{
-			if (check_map_requirements(map[i][j], map_info))
+			if (enemy && map[i][j] == 'N')
+				enemy++;
+			else if (check_map_requirements(map[i][j], map_info))
+				return (1);
+			if (enemy > 2)
 				return (1);
 			j++;
 		}
@@ -33,11 +37,11 @@ int	check_map_content(char **map, struct s_parser **map_info)
 	return (0);
 }
 
-void	is_map_valid(char **map, struct s_parser **info)
+void	is_map_valid(char **map, struct s_parser **info, int enemy)
 {
 	if (check_is_map_rectangle(map, info) || check_walls(map, info))
 		print_error_free_exit(INVALID, map, *info);
-	if (check_map_content(map, info))
+	if (check_map_content(map, info, enemy))
 		print_error_free_exit(INVALID, map, *info);
 	if (!(*info)->player || !(*info)->exit|| !(*info)->collectible)
 		print_error_free_exit(INVALID, map, *info);
@@ -78,7 +82,7 @@ void	check_file_name(char *str)
 		print_error_and_exit("Error\n[Wrong file]: worng file type\n");
 }
 
-char	**parser(int ac, char **av)
+char	**parser(int ac, char **av, int enemy)
 {
 	struct s_parser	*map_info;
 	char			*buffer;
@@ -101,7 +105,7 @@ char	**parser(int ac, char **av)
 	free(buffer);
 	if (!map)
 		print_error_free_exit(SPLIT, NULL, map_info);
-	is_map_valid(map, &map_info);
+	is_map_valid(map, &map_info, enemy);
 	free(map_info);
 	map_checker(map);
 	return (map);

@@ -22,7 +22,6 @@ void	*mlx_file_to_image(void *mlx, char *str)
 
 void	create_collectible(t_game *game, int x, int y)
 {
-	static int	i;
 	void	*img;
 
 		img = mlx_file_to_image(game->mlx, "./sprites/coin1.xpm");
@@ -31,7 +30,6 @@ void	create_collectible(t_game *game, int x, int y)
 	create_empty(game, x, y);
 	mlx_put_image_to_window(game->mlx, game->win, img, x * 40, y * 40);
 	mlx_destroy_image(game->mlx, img);
-	i++;
 }
 
 void	create_exit(t_game *game, int x, int y)

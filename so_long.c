@@ -90,7 +90,7 @@ int	main(int ac, char **av)
 {
 	t_game	game;
 
-	game.map = parser(ac, av);
+	game.map = parser(ac, av, 0);
 	map_dimensions(&game);
 	exit_dimensions(&game);
 	game_init(&game);

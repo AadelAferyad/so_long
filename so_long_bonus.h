@@ -22,7 +22,7 @@
 # define LEFT 97
 # define ESC 65307
 
-# define DELAY 5000
+# define DELAY 90000
 
 typedef struct game_map
 {
@@ -30,6 +30,8 @@ typedef struct game_map
 	int		x;
 	int		exit_y;
 	int		exit_x;
+	int		enemy_y;
+	int		enemy_x;
 	int		width;
 	int		height;
 	int		coins;

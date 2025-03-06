@@ -26,13 +26,14 @@
 struct	s_parser
 {
 	int	player;
+	int	enemy;
 	int	collectible;
 	int	exit;
 	int	x;
 	int	y;
 };
 
-char	**parser(int ac, char **av);
+char	**parser(int ac, char **av, int enemy);
 
 void	print_error_free_exit(char *str, char **buffer, struct s_parser *map);
 void	print_error_and_exit(char *str);
