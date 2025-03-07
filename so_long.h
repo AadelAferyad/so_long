@@ -44,6 +44,6 @@ void	create_player(t_game *game, int x, int y);
 void	create_empty(t_game *game, int x, int y);
 void	*mlx_file_to_image(void *mlx, char *str);
 void	n_coins_player_pos(t_game *game);
-int		cleanup(t_game *game);
+int		cleanup(t_game *game, int ex);
 
 #endif

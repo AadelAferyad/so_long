@@ -36,13 +36,13 @@ void	n_coins_player_pos(t_game *game)
 	}
 }
 
-int	cleanup(t_game *game)
+int	cleanup(t_game *game, int ex)
 {
 	free_map(game->map);
 	mlx_destroy_window(game->mlx, game->win);
 	mlx_destroy_display(game->mlx);
 	free(game->mlx);
-	exit(0);
+	exit(ex);
 	return (0);
 }
 

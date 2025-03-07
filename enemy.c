@@ -20,7 +20,7 @@ void	create_enemy(t_game *game, int x, int y)
 	game->enemy_y = y;
 	game->enemy_x = x;
 	if (!img)
-		exit(21);
+		cleanup(game, 1);
 	mlx_put_image_to_window(game->mlx, game->win, img, x * 40, y * 40);
 	mlx_destroy_image(game->mlx, img);
 }
@@ -30,7 +30,7 @@ int	find_enemy_path(t_game *game, int x, int y)
 	if (x <= 0 || x >= game->width || y <= 0 || y >= game->height)
 		return (0);
 	if (x == game->x && y == game->y)
-		cleanup(game);
+		cleanup(game, 0);
 	if (game->map[y][x] == EMPTY)
 		return (1);
 	return (0);
@@ -67,10 +67,10 @@ void	printer(t_game *game, int move)
 
 	s = ft_itoa(move);
 	if (!s)
-		exit(2);
+		cleanup(game, 1);
 	img = mlx_file_to_image(game->mlx, "./textures/bot_wall.xpm");
 	if (!img)
-		exit(21);
+		cleanup(game, 1);
 	mlx_put_image_to_window(game->mlx, game->win, img, 0, 0);
 	mlx_destroy_image(game->mlx, img);
 	mlx_string_put(game->mlx, game->win, 10, 20, 0xFF0000, s);

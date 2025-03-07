@@ -27,7 +27,7 @@ void	create_wall(t_game *game, int x, int y)
 	else
 		img = mlx_file_to_image(game->mlx, "./textures/wall.xpm");
 	if (!img)
-		exit(21);
+		cleanup(game, 1);
 	mlx_put_image_to_window(game->mlx, game->win, img, x * 40, y * 40);
 	mlx_destroy_image(game->mlx, img);
 }
@@ -80,7 +80,7 @@ void	movment(t_game *game, int x, int y)
 		printer(game, moves);
 		if ((game->map[y][x] == EXIT && !game->coins)
 			|| (x == game->enemy_x && y == game->enemy_y))
-			cleanup(game);
+			cleanup(game, 0);
 		game->x = x;
 		game->y = y;
 	}
@@ -94,7 +94,7 @@ int	handle_key(int key_code, t_game *game)
 	x = game->x;
 	y = game->y;
 	if (key_code == ESC)
-		cleanup(game);
+		cleanup(game, 0);
 	if (key_code == UP)
 		y--;
 	else if (key_code == DOWN)
