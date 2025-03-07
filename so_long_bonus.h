@@ -6,7 +6,7 @@
 /*   By: aaferyad <aaferyad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 23:33:38 by aaferyad          #+#    #+#             */
-/*   Updated: 2025/03/03 04:52:34 by aaferyad         ###   ########.fr       */
+/*   Updated: 2025/03/07 03:06:26 by aaferyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,10 @@ void	create_animation(t_game *game, int x, int y);
 void	player_animation_back(t_game *game, int x, int y);
 void	player_animation_right(t_game *game, int x, int y);
 void	player_animation_left(t_game *game, int x, int y);
+int		find_enemy_path(t_game *game, int x, int y);
+void	move_enemy(t_game *game);
+void	create_enemy(t_game *game, int x, int y);
+int		no_event(t_game *game);
+void	printer(t_game *game, int move);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: aaferyad <aaferyad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 00:24:05 by aaferyad          #+#    #+#             */
-/*   Updated: 2025/02/22 10:47:07 by aaferyad         ###   ########.fr       */
+/*   Updated: 2025/03/07 03:08:06 by aaferyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	is_map_valid(char **map, struct s_parser **info, int enemy)
 		print_error_free_exit(INVALID, map, *info);
 	if (check_map_content(map, info, enemy))
 		print_error_free_exit(INVALID, map, *info);
-	if (!(*info)->player || !(*info)->exit|| !(*info)->collectible)
+	if (!(*info)->player || !(*info)->exit || !(*info)->collectible)
 		print_error_free_exit(INVALID, map, *info);
 }
 

@@ -6,7 +6,7 @@
 /*   By: aaferyad <aaferyad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 23:35:20 by aaferyad          #+#    #+#             */
-/*   Updated: 2025/03/03 05:02:38 by aaferyad         ###   ########.fr       */
+/*   Updated: 2025/03/07 03:06:31 by aaferyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,6 @@ void	create_wall(t_game *game, int x, int y)
 		img = mlx_file_to_image(game->mlx, "./sprites/left_wall.xpm");
 	else
 		img = mlx_file_to_image(game->mlx, "./sprites/wall.xpm");
-	if (!img)
-		exit(21);
-	mlx_put_image_to_window(game->mlx, game->win, img, x * 40, y * 40);
-	mlx_destroy_image(game->mlx, img);
-}
-
-void	create_enemy(t_game *game, int x, int y)
-{
-	void	*img;
-
-	img = mlx_file_to_image(game->mlx, "./sprites/enemy.xpm");
-	game->enemy_y = y;
-	game->enemy_x = x;
 	if (!img)
 		exit(21);
 	mlx_put_image_to_window(game->mlx, game->win, img, x * 40, y * 40);
@@ -74,7 +61,6 @@ void	rander_game(t_game *game)
 	}
 }
 
-
 void	movment(t_game *game, int x, int y)
 {
 	static int	moves;
@@ -91,9 +77,9 @@ void	movment(t_game *game, int x, int y)
 		create_empty(game, game->x, game->y);
 		create_animation(game, x, y);
 		moves++;
-		ft_putnbr_fd(moves, 1);
-		ft_putchar('\n');
-		if ((game->map[y][x] == EXIT && !game->coins) || (x == game->enemy_x && y == game->enemy_y))
+		printer(game, moves);
+		if ((game->map[y][x] == EXIT && !game->coins)
+			|| (x == game->enemy_x && y == game->enemy_y))
 			cleanup(game);
 		game->x = x;
 		game->y = y;
@@ -120,56 +106,6 @@ int	handle_key(int key_code, t_game *game)
 	else
 		return (0);
 	movment(game, x, y);
-	return (0);
-}
-
-int	find_enemy_path(t_game *game, int x, int y)
-{
-	if (x <= 0 || x >= game->width || y <= 0 || y >= game->height)
-		return (0);
-	if (x == game->x && y == game->y)
-		cleanup(game);
-	if (game->map[y][x] == EMPTY)
-		return (1);
-
-	return (0);
-}
-
-void	move_enemy(t_game *game)
-{
-	static int	j;
-	int	x;
-	int	y;
-
-	y = game->enemy_y;
-	x = game->enemy_x;
-	if (!j && find_enemy_path(game, x + 1, y))
-		x++;
-	else if (!j && find_enemy_path(game, x, y + 1))
-		y++;
-	else
-		j = 1;
-	if (j && find_enemy_path(game, x - 1, y))
-		x--;
-	else if (j && find_enemy_path(game, x, y - 1))
-		y--;
-	else
-		j = 0;
-	create_empty(game, game->enemy_x, game->enemy_y);
-	create_enemy(game, x, y);
-}
-
-int no_event(t_game *game)
-{
-	static int	i;
-
-	if (i < DELAY)
-	{
-		i++;
-		return (0);
-	}
-	move_enemy(game);
-	i = 0;
 	return (0);
 }
 
