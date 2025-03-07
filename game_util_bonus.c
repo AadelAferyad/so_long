@@ -61,5 +61,6 @@ void	create_empty(t_game *game, int x, int y)
 	img = mlx_file_to_image(game->mlx, "./textures/empty.xpm");
 	if (!img)
 		cleanup(game, 1);
+	mlx_put_image_to_window(game->mlx, game->win, img, x * 40, y * 40);
 	mlx_destroy_image(game->mlx, img);
 }
