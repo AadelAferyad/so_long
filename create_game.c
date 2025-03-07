@@ -6,7 +6,7 @@
 /*   By: aaferyad <aaferyad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 13:03:51 by aaferyad          #+#    #+#             */
-/*   Updated: 2025/03/07 03:13:20 by aaferyad         ###   ########.fr       */
+/*   Updated: 2025/03/07 04:04:21 by aaferyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ void	rander_game(t_game *game)
 				create_collectible(game, x, y);
 			if (game->map[y][x] == PLAYER)
 				create_player(game, x, y);
+			if (game->map[y][x] == EXIT)
+				create_exit(game, x, y);
 			x++;
 		}
 		y++;
@@ -68,8 +70,8 @@ void	movment(t_game *game, int x, int y)
 			game->map[y][x] = EMPTY;
 			game->coins--;
 		}
-		if (!game->coins)
-			create_exit(game, game->exit_x, game->exit_y);
+		if (game->map[y][x] == EXIT && game->coins)
+			return ;
 		create_empty(game, game->x, game->y);
 		create_player(game, x, y);
 		moves++;
