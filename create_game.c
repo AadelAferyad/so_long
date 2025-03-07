@@ -6,7 +6,7 @@
 /*   By: aaferyad <aaferyad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 13:03:51 by aaferyad          #+#    #+#             */
-/*   Updated: 2025/03/01 16:42:40 by aaferyad         ###   ########.fr       */
+/*   Updated: 2025/03/07 03:13:20 by aaferyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,15 @@ void	create_wall(t_game *game, int x, int y)
 	void	*img;
 
 	if (!y)
-		img = mlx_file_to_image(game->mlx, "./sprites/bot_wall.xpm");
+		img = mlx_file_to_image(game->mlx, "./textures/bot_wall.xpm");
 	else if (y == game->height - 1)
-		img = mlx_file_to_image(game->mlx, "./sprites/up_wall.xpm");
+		img = mlx_file_to_image(game->mlx, "./textures/up_wall.xpm");
 	else if (x == game->width - 1)
-		img = mlx_file_to_image(game->mlx, "./sprites/right_wall.xpm");
+		img = mlx_file_to_image(game->mlx, "./textures/right_wall.xpm");
 	else if (!x)
-		img = mlx_file_to_image(game->mlx, "./sprites/left_wall.xpm");
+		img = mlx_file_to_image(game->mlx, "./textures/left_wall.xpm");
 	else
-		img = mlx_file_to_image(game->mlx, "./sprites/wall.xpm");
+		img = mlx_file_to_image(game->mlx, "./textures/wall.xpm");
 	if (!img)
 		exit(21);
 	mlx_put_image_to_window(game->mlx, game->win, img, x * 40, y * 40);

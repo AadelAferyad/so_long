@@ -6,7 +6,7 @@
 /*   By: aaferyad <aaferyad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 03:03:16 by aaferyad          #+#    #+#             */
-/*   Updated: 2025/03/07 03:06:20 by aaferyad         ###   ########.fr       */
+/*   Updated: 2025/03/07 03:13:57 by aaferyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	create_enemy(t_game *game, int x, int y)
 {
 	void	*img;
 
-	img = mlx_file_to_image(game->mlx, "./sprites/enemy.xpm");
+	img = mlx_file_to_image(game->mlx, "./textures/enemy.xpm");
 	game->enemy_y = y;
 	game->enemy_x = x;
 	if (!img)
@@ -68,7 +68,7 @@ void	printer(t_game *game, int move)
 	s = ft_itoa(move);
 	if (!s)
 		exit(2);
-	img = mlx_file_to_image(game->mlx, "./sprites/bot_wall.xpm");
+	img = mlx_file_to_image(game->mlx, "./textures/bot_wall.xpm");
 	if (!img)
 		exit(21);
 	mlx_put_image_to_window(game->mlx, game->win, img, 0, 0);

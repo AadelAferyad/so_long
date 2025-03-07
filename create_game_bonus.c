@@ -6,7 +6,7 @@
 /*   By: aaferyad <aaferyad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 23:35:20 by aaferyad          #+#    #+#             */
-/*   Updated: 2025/03/07 03:06:31 by aaferyad         ###   ########.fr       */
+/*   Updated: 2025/03/07 03:13:46 by aaferyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,15 @@ void	create_wall(t_game *game, int x, int y)
 	void	*img;
 
 	if (!y)
-		img = mlx_file_to_image(game->mlx, "./sprites/bot_wall.xpm");
+		img = mlx_file_to_image(game->mlx, "./textures/bot_wall.xpm");
 	else if (y == game->height - 1)
-		img = mlx_file_to_image(game->mlx, "./sprites/up_wall.xpm");
+		img = mlx_file_to_image(game->mlx, "./textures/up_wall.xpm");
 	else if (x == game->width - 1)
-		img = mlx_file_to_image(game->mlx, "./sprites/right_wall.xpm");
+		img = mlx_file_to_image(game->mlx, "./textures/right_wall.xpm");
 	else if (!x)
-		img = mlx_file_to_image(game->mlx, "./sprites/left_wall.xpm");
+		img = mlx_file_to_image(game->mlx, "./textures/left_wall.xpm");
 	else
-		img = mlx_file_to_image(game->mlx, "./sprites/wall.xpm");
+		img = mlx_file_to_image(game->mlx, "./textures/wall.xpm");
 	if (!img)
 		exit(21);
 	mlx_put_image_to_window(game->mlx, game->win, img, x * 40, y * 40);
@@ -50,7 +50,7 @@ void	rander_game(t_game *game)
 			if (game->map[y][x] == COIN)
 				create_collectible(game, x, y);
 			if (game->map[y][x] == PLAYER)
-				create_player(game, x, y, "./sprites/front_walk8.xpm");
+				create_player(game, x, y, "./textures/front_walk8.xpm");
 			if (game->map[y][x] == EXIT)
 				create_exit(game, x, y);
 			if (game->map[y][x] == 'N')

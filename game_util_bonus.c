@@ -6,7 +6,7 @@
 /*   By: aaferyad <aaferyad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 23:35:44 by aaferyad          #+#    #+#             */
-/*   Updated: 2025/03/07 03:07:14 by aaferyad         ###   ########.fr       */
+/*   Updated: 2025/03/07 03:14:36 by aaferyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	create_collectible(t_game *game, int x, int y)
 {
 	void	*img;
 
-	img = mlx_file_to_image(game->mlx, "./sprites/coin1.xpm");
+	img = mlx_file_to_image(game->mlx, "./textures/coin1.xpm");
 	if (!img)
 		exit(21);
 	create_empty(game, x, y);
@@ -36,7 +36,7 @@ void	create_exit(t_game *game, int x, int y)
 {
 	void	*img;
 
-	img = mlx_file_to_image(game->mlx, "./sprites/door.xpm");
+	img = mlx_file_to_image(game->mlx, "./textures/door.xpm");
 	if (!img)
 		exit(21);
 	mlx_put_image_to_window(game->mlx, game->win, img, x * 40, y * 40);
@@ -58,7 +58,7 @@ void	create_empty(t_game *game, int x, int y)
 {
 	void	*img;
 
-	img = mlx_file_to_image(game->mlx, "./sprites/empty.xpm");
+	img = mlx_file_to_image(game->mlx, "./textures/empty.xpm");
 	if (!img)
 		exit(21);
 	mlx_put_image_to_window(game->mlx, game->win, img, x * 40, y * 40);
